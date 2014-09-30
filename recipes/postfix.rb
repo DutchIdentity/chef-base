@@ -1,7 +1,7 @@
 #
 # Author:: Daniel Paulus (<d.paulus@gmail.com>)
 # Cookbook Name:: DI-Base
-# Recipe:: default
+# Recipe:: postfix
 #
 # Copyright 2014
 #
@@ -17,4 +17,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe 'di-base::postfix'
+node.set['postfix']['sasl_password_file'] = '/etc/postfix/sasl_passwd'
+
+node.set['postfix']['main']['relayhost'] = 'smtp.mailgun.org'
+node.set['postfix']['main']['smtp_sasl_auth_enable'] = 'yes'
+node.set['postfix']['main']['smtp_use_tls'] = 'no'
+node.set['postfix']['main']['smtpd_use_tls'] = 'no'
+node.set['postfix']['main']['mydomain'] = 'danielpaulus.com'
+node.set['postfix']['main']['myhostname'] = 'blog.danielpaulus.com'
+
+node.set['postfix']['sasl']['smtp_sasl_user_name'] = 'username'
+node.set['postfix']['sasl']['smtp_sasl_passwd'] = '0123456789'
+
+include_recipe 'postfix::sasl_auth'
