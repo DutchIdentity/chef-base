@@ -16,3 +16,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+default['base']['email']['smtp_sasl_user_name'] = 'postmaster'
+default['base']['email']['smtp_sasl_password']  = 'p@ssw0rd'
+default['base']['email']['relayhost'] = 'smtp.mailgun.org'
+default['base']['email']['domain']    = 'danielpaulus.com'
+default['base']['email']['hostname']  = 'blog.danielpaulus.com'

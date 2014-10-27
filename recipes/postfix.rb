@@ -19,14 +19,14 @@
 
 node.set['postfix']['sasl_password_file'] = '/etc/postfix/sasl_passwd'
 
-node.set['postfix']['main']['relayhost'] = 'smtp.mailgun.org'
+node.set['postfix']['main']['relayhost']             = node['base']['email']['relayhost']
+node.set['postfix']['main']['mydomain']              = node['base']['email']['domain']
+node.set['postfix']['main']['myhostname']            = node['base']['email']['hostname']
 node.set['postfix']['main']['smtp_sasl_auth_enable'] = 'yes'
-node.set['postfix']['main']['smtp_use_tls'] = 'no'
-node.set['postfix']['main']['smtpd_use_tls'] = 'no'
-node.set['postfix']['main']['mydomain'] = 'danielpaulus.com'
-node.set['postfix']['main']['myhostname'] = 'blog.danielpaulus.com'
+node.set['postfix']['main']['smtp_use_tls']          = 'no'
+node.set['postfix']['main']['smtpd_use_tls']         = 'no'
 
-node.set['postfix']['sasl']['smtp_sasl_user_name'] = 'username'
-node.set['postfix']['sasl']['smtp_sasl_passwd'] = '0123456789'
+node.set['postfix']['sasl']['smtp_sasl_user_name']   = node['base']['email']['smtp_sasl_user_name']
+node.set['postfix']['sasl']['smtp_sasl_passwd']      = node['base']['email']['smtp_sasl_passwd']
 
 include_recipe 'postfix::sasl_auth'
