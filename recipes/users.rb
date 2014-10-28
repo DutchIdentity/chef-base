@@ -1,7 +1,7 @@
 #
 # Author:: Daniel Paulus (<d.paulus@gmail.com>)
 # Cookbook Name:: DI-Base
-# Recipe:: default
+# Recipe:: users
 #
 # Copyright 2014
 #
@@ -17,5 +17,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe 'di-base::postfix'
-include_recipe 'di-base::users'
+# Create the users
+include_recipe 'users'
+users_manage "admins" do
+  group_id 2300
+  action [ :remove, :create ]
+end
+
+# Manage sudo rights
+node.set['authorization']['sudo']['groups']        = ['admins']
+node.set['authorization']['sudo']['passwordless']  = true
+include_recipe 'sudo'
+
+# Manage sshd settings (no root, no passwd)
+node.set['openssh']['server']['permit_root_login']       = 'no'
+node.set['openssh']['server']['pubkey_authentication']   = 'yes'
+node.set['openssh']['server']['password_authentication'] = 'no'
+node.set['openssh']['server']['permit_empty_passwords']  = 'no'
+include_recipe 'openssh'
