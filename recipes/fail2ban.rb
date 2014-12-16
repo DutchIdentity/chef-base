@@ -17,7 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-node.set['fail2ban']['email']   = 'system@blog.danielpaulus.com'
+node.set['fail2ban']['email']   = node['base']['admin']['email']
+node.set['fail2ban']['action']  = 'action_mw'
 node.set['fail2ban']['bantime'] = 3600
 
 include_recipe 'fail2ban::default'

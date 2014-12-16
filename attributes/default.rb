@@ -22,3 +22,5 @@ default['base']['email']['smtp_sasl_password']  = 'p@ssw0rd'
 default['base']['email']['relayhost'] = 'smtp.mailgun.org'
 default['base']['email']['domain']    = 'danielpaulus.com'
 default['base']['email']['hostname']  = 'blog.danielpaulus.com'
+
+default['base']['admin']['email'] = 'info@dutch-identity.com'
