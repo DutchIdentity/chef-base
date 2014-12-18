@@ -18,4 +18,4 @@
 # limitations under the License.
 
 package 'htop'
-package 'whois'
+package 'jwhois'
