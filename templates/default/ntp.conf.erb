@@ -1,0 +1,17 @@
+# THIS FILE IS MANAGED BY CHEF!!
+
+# Use public servers from the pool.ntp.org project.
+server 0.nl.pool.ntp.org
+server 1.nl.pool.ntp.org
+server 2.nl.pool.ntp.org
+server 3.nl.pool.ntp.org
+
+# Keep ntpd from panicking in the event of a large clock skew
+# when a VM guest is suspended and resumed.
+tinker panic 0
+
+# Drift file.  Put this in a directory which the daemon can write to.
+# No symbolic links allowed, either, since the daemon updates the file
+# by creating a temporary in the same directory and then rename()'ing
+# it to the file.
+driftfile /var/lib/ntp/drift

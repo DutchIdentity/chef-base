@@ -17,10 +17,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package 'tzdata' do
-  action :install
+%w(tzdata ntp ntpdate).each do |pkg|
+  package pkg
 end
 
 link '/etc/localtime' do
   to '/usr/share/zoneinfo/Europe/Amsterdam'
+end
+
+template '/etc/ntp.conf' do
+  source 'ntp.conf.erb'
+  notifies :reload, 'service[ntpd]'
+end
+
+service 'ntpd' do
+  action [:enable, :start]
+  supports :status => true, :start => true, :stop => true, :restart => true
 end
