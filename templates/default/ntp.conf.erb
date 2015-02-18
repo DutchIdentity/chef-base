@@ -15,3 +15,7 @@ tinker panic 0
 # by creating a temporary in the same directory and then rename()'ing
 # it to the file.
 driftfile /var/lib/ntp/drift
+
+# Stop NTP reflection attacks
+disable monitor
+restrict default ignore
